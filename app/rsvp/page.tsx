@@ -1,78 +1,50 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
-interface DataItem {
-  id: number;
-  name: string;
-  age: number;
-}
-
-export default function RSVPPage() {
+export default function Page() {
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [data, setData] = useState<DataItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  // Fetch data from API
-  const fetchData = async () => {
-    const res = await fetch("/api/data");
-    const result = await res.json();
-    setData(result);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  // Add new item
-  const handleAdd = async () => {
-    if (!name || !age) return;
+  const submitData = async () => {
+    if (!name.trim()) {
+      toast.error("Name cannot be blank!");
+      return;
+    }
 
     const res = await fetch("/api/data", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, age: Number(age) }),
+      body: JSON.stringify({ name }),
     });
 
-    const newItem = await res.json();
-    setData([...data, newItem]);
+    const payload = await res.json();
 
-    setName("");
-    setAge("");
+    if (res.ok) {
+      toast.success("Saved successfully!");
+      setName("");
+    } else {
+      toast.error(payload.message || "Something went wrong!");
+    }
   };
 
   return (
-    <div className="p-8 space-y-6 max-w-lg mx-auto">
-      <Card>
-        <CardContent className="space-y-4">
-          <CardTitle>Add Person</CardTitle>
-          <Input
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Input
-            placeholder="Age"
-            type="number"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
-          />
-          <Button onClick={handleAdd}>Add</Button>
-        </CardContent>
-      </Card>
+    <div className="flex flex-col items-center space-y-4 p-10">
+      <h3 className="">Kindly</h3>
+      <h1 className="navigation-header">RSVP</h1>
+      <Input
+        placeholder="Please enter your name...."
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="w-100 text-lg guest-input"
+      />
 
-      <div className="space-y-2">
-        {data.map((item) => (
-          <Card key={item.id}>
-            <CardContent>
-              {item.name} — {item.age} years old
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <Button onClick={submitData} className="w-50 btn" disabled={loading}>
+        {loading ? "Saving..." : "Submit"}
+      </Button>
     </div>
   );
 }

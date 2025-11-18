@@ -5,6 +5,7 @@ import NavigationBar from "./components/NavigationBar";
 import { motion } from "motion/react";
 import { metadata } from "./metadata";
 import BackgroundMusic from "./components/BackgroundMusic";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased p-6 flex items-center justify-center h-screen w-screen bg-[#89CFF0]`}
       >
+        <Toaster richColors closeButton />
         <BackgroundMusic />
         <motion.div
           className="relative h-full w-full flex items-center justify-center bg-[#F6F5F0]"
@@ -34,7 +36,7 @@ export default function RootLayout({
           animate={{ filter: "none" }}
           transition={{ duration: 1 }}
         >
-          <div className="absolute inset-10 ">
+          <div className="absolute top-10 ">
             <NavigationBar />
           </div>
 

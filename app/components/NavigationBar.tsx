@@ -20,7 +20,7 @@ const NavigationBar = () => {
 
   return (
     <nav className="w-full p-4 mb-6">
-      <ul className="flex justify-center bg-[#F6F5F0] space-x-4 md:bg-none md:space-x-20">
+      <ul className="flex justify-center space-x-4  md:space-x-20">
         {navItems.map((item) => (
           <li
             key={item.path}

@@ -150,6 +150,18 @@
   }
   .album-text{
     font-family: "Stack Sans Text", sans-serif;
+    @apply text-sm;
+  }
+  .navigation-header {
+    @apply text-[4rem] -tracking-[0.5rem] leading-[0.7];
+  }
+  .guest-input{
+    font-family: "Stack Sans Text", sans-serif !important;
+    font-size: 1rem !important;
+  }
+  .btn{
+    background-color: #89CFF0 !important;
+    font-size: 1.2rem !important;
   }
 }
 
@@ -174,7 +186,5 @@
   .address {
     @apply text-sm tracking-[0];
   }
-  .navigation-header {
-    @apply text-[4rem] -tracking-[0.5rem] leading-[0.7];
-  }
+  
 }
