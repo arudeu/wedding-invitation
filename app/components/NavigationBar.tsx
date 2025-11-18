@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NavigationBar = () => {
-  const [activePage, setActivePage] = useState("/");
-
-  useEffect(() => {
-    setActivePage(window.location.pathname);
-  }, []);
+  const location = useLocation();
 
   const baseStyle =
     "md:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
-  const activeStyle = "text-gray-900 scale-110"; // Highlighted
+  const activeStyle = "text-gray-900 scale-110";
   const inactiveStyle = "text-[#89CFF0]";
 
   const navItems = [
@@ -19,17 +15,16 @@ const NavigationBar = () => {
   ];
 
   return (
-    <nav className="w-full p-4 mb-6">
-      <ul className="flex justify-center space-x-4  md:space-x-20">
+    <nav className="w-full p-4 mb-6 absolute top-10">
+      <ul className="flex justify-center space-x-4 md:space-x-20">
         {navItems.map((item) => (
           <li
             key={item.path}
             className={`${baseStyle} ${
-              activePage === item.path ? activeStyle : inactiveStyle
+              location.pathname === item.path ? activeStyle : inactiveStyle
             }`}
-            onClick={() => (window.location.href = item.path)}
           >
-            {item.name}
+            <Link to={item.path}>{item.name}</Link>
           </li>
         ))}
       </ul>

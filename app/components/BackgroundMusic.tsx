@@ -1,41 +1,35 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Howl } from "howler";
+import { getMusic } from "./lib/music";
 import { Play, Pause } from "lucide-react";
 
+let isInitialized = false; // prevent re-init
+
 export default function BackgroundMusic() {
-  const [music, setMusic] = useState<Howl | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const music = getMusic();
 
   useEffect(() => {
-    const sound = new Howl({
-      src: ["/music/bg.mp3"], // Put your audio file in /public/music
-      loop: true,
-      volume: 0.5,
-      html5: true,
-    });
+    if (!isInitialized) {
+      isInitialized = true;
 
-    setMusic(sound);
-
-    // Try autoplay
-    try {
-      sound.play();
+      // Try autoplay
+      try {
+        music.play();
+        setIsPlaying(true);
+      } catch {
+        // Autoplay blocked
+        setIsPlaying(false);
+      }
+    } else if (music?.playing()) {
       setIsPlaying(true);
-    } catch {
-      console.log("Autoplay blocked; click the vinyl to play.");
     }
-
-    return () => {
-      // Ensure the cleanup function does not return the value of sound.unload()
-      // (some typings may have unload() return null), so use a block that returns undefined.
-      sound.unload();
-    };
   }, []);
 
   const toggleMusic = () => {
     if (!music) return;
-    if (isPlaying) {
+    if (music.playing()) {
       music.pause();
       setIsPlaying(false);
     } else {
@@ -51,10 +45,7 @@ export default function BackgroundMusic() {
                    transition-transform transform hover:scale-110 hover:rotate-[15deg]"
         onClick={toggleMusic}
       >
-        {/* Vinyl center */}
         <div className="w-6 h-6 rounded-full bg-gray-500 animate-spin-slow"></div>
-
-        {/* Play/Pause Icon Overlay */}
         <div className="absolute text-white">
           {isPlaying ? <Pause size={20} /> : <Play size={20} />}
         </div>

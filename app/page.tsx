@@ -4,7 +4,11 @@ import { motion } from "motion/react";
 
 export default function Home() {
   return (
-    <div>
+    <motion.div
+      initial={{ filter: "blur(20px)" }}
+      animate={{ filter: "none" }}
+      transition={{ duration: 1 }}
+    >
       <motion.h3
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -51,6 +55,6 @@ export default function Home() {
         <br />
         PALLOCAN WEST, BATANGAS CITY
       </motion.h5>
-    </div>
+    </motion.div>
   );
 }

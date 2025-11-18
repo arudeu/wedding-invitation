@@ -4,8 +4,9 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { motion } from "motion/react";
 
-export default function Page() {
+export default function RSVPPage() {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +33,12 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-10">
+    <motion.div
+      className="flex flex-col items-center space-y-4 p-10"
+      initial={{ filter: "blur(20px)" }}
+      animate={{ filter: "none" }}
+      transition={{ duration: 1 }}
+    >
       <h3 className="">Kindly</h3>
       <h1 className="navigation-header">RSVP</h1>
       <Input
@@ -45,6 +51,6 @@ export default function Page() {
       <Button onClick={submitData} className="w-50 btn" disabled={loading}>
         {loading ? "Saving..." : "Submit"}
       </Button>
-    </div>
+    </motion.div>
   );
 }
