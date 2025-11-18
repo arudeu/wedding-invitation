@@ -3,7 +3,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import NavigationBar from "./components/NavigationBar";
 import { motion } from "motion/react";
-import { metadata } from "./metadata";
+import Head from "next/head";
 import BackgroundMusic from "./components/BackgroundMusic";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
@@ -25,6 +25,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <title>Joaquin & Krisna</title>
+        <meta name="description" content="You Are Invited!" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased p-6 flex items-center justify-center h-screen w-screen bg-[#89CFF0]`}
       >
