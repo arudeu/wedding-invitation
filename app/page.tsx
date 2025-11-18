@@ -34,12 +34,23 @@ export default function Home() {
       >
         KRISNA
       </motion.h1>
-      <h4>NOVEMBER 28, 2025 | 11:00 AM</h4>
-      <h5 className="mt-5 address album-text text-center text-md">
+      <motion.h4
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 8, ease: [0.5, 0.71, 1, 1] }}
+      >
+        NOVEMBER 28, 2025 | 11:00 AM
+      </motion.h4>
+      <motion.h5
+        className="mt-5 address album-text text-center text-md"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 8, ease: [0.5, 0.71, 1, 1] }}
+      >
         BLK 11, LOT 44, ST. MARTIN ST. TIERRA VERDE SUBDIVISION,
         <br />
         PALLOCAN WEST, BATANGAS CITY
-      </h5>
+      </motion.h5>
     </div>
   );
 }

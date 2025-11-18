@@ -152,3 +152,29 @@
     font-family: "Stack Sans Text", sans-serif;
   }
 }
+
+@media screen and (max-width: 412px) {
+  h1 {
+    @apply text-[5rem] -tracking-[0.7rem] leading-[0.5];
+    -webkit-text-stroke: 1px #F6F5F0;
+    text-stroke: 1px #F6F5F0;
+  }
+  .font-outline-4 {
+    -webkit-text-stroke: 4px #F6F5F0;
+    text-stroke: 4px #F6F5F0;
+  }
+  h3 {
+    -webkit-text-stroke: 0.2px #F6F5F0;
+    text-stroke: 0.2px #F6F5F0;
+    @apply text-5xl text-center mb-2 text-black leading-[0.8] -tracking-[0.2rem];
+  }
+  h4 {
+    @apply text-sm text-center mb-2 text-[#89CFF0];
+  }
+  .address {
+    @apply text-sm tracking-[0];
+  }
+  .navigation-header {
+    @apply text-[4rem] -tracking-[0.5rem] leading-[0.7];
+  }
+}
