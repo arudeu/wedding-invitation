@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 
 export default function Home() {
   return (

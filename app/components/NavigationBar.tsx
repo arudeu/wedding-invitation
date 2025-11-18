@@ -1,7 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+"use client";
+
+import { useRouter, usePathname } from "next/navigation";
 
 const NavigationBar = () => {
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const baseStyle =
     "md:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
@@ -21,10 +24,10 @@ const NavigationBar = () => {
           <li
             key={item.path}
             className={`${baseStyle} ${
-              location.pathname === item.path ? activeStyle : inactiveStyle
+              pathname === item.path ? activeStyle : inactiveStyle
             }`}
           >
-            <Link to={item.path}>{item.name}</Link>
+            <button onClick={() => router.push(item.path)}>{item.name}</button>
           </li>
         ))}
       </ul>
