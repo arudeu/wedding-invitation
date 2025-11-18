@@ -76,7 +76,7 @@ export default function BackgroundMusic() {
         bg-[url('/music/vinyl.jpg')] bg-cover bg-center
         ${isPlaying ? "animate-spin-slow" : "opacity-50"}`}
       ></div>
-      <div className="text-white text-lg w-53 md:w-30">
+      <div className="text-white text-lg w-20">
         <h5 className="text-sm album-text">The Last Time</h5>
         <h5 className="text-[0.5rem] album-text">Eric Benét</h5>
       </div>

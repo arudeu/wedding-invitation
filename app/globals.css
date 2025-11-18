@@ -165,7 +165,7 @@
   }
 }
 
-@media screen and (max-width: 412px) {
+@media screen and (max-width: 614px) {
   h1 {
     @apply text-[5rem] -tracking-[0.7rem] leading-[0.5];
     -webkit-text-stroke: 1px #F6F5F0;

@@ -46,10 +46,10 @@ export default function RootLayout({
           </div>
 
           <div>
-            <span className="absolute top-10 left-5 w-60 h-60 bg-[url('/flw-tl.svg')] bg-no-repeat bg-[length:15rem_15rem] -z-1"></span>
-            <span className="absolute top-10 right-5 w-60 h-60 bg-[url('/flw-tr.svg')] bg-no-repeat bg-[length:15rem_15rem] -z-1"></span>
-            <span className="absolute bottom-10 left-5 w-60 h-60 bg-[url('/flw-bl.svg')] bg-no-repeat bg-[length:15rem_15rem] -z-1"></span>
-            <span className="absolute bottom-10 right-5 w-60 h-60 bg-[url('/flw-br.svg')] bg-no-repeat bg-[length:15rem_15rem] -z-1"></span>
+            <span className="hidden xl:block absolute top-1 left-1 xl:top-10 xl:left-5 xl:w-60 xl:h-60 bg-[url('/flw-tl.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] -z-1"></span>
+            <span className="hidden xl:block absolute top-1 right-1 xl:top-10 xl:right-5 xl:w-60 xl:h-60 bg-[url('/flw-tr.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] -z-1"></span>
+            <span className="hidden xl:block absolute bottom-1 left-1 xl:bottom-10 xl:left-5 xl:w-60 xl:h-60 bg-[url('/flw-bl.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] -z-1"></span>
+            <span className="hidden xl:block absolute bottom-1 right-1 xl:bottom-10 xl:right-5 xl:w-60 xl:h-60 bg-[url('/flw-br.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] -z-1"></span>
 
             {children}
           </div>

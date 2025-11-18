@@ -39,7 +39,7 @@ export default function Page() {
         placeholder="Please enter your name...."
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-100 text-lg guest-input"
+        className="xl:w-100 text-lg guest-input"
       />
 
       <Button onClick={submitData} className="w-50 btn" disabled={loading}>
