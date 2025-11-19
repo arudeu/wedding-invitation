@@ -7,7 +7,7 @@ const NavigationBar = () => {
   const pathname = usePathname();
 
   const baseStyle =
-    "lg:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
+    "text-sm sm:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
   const activeStyle = "text-gray-900 scale-110";
   const inactiveStyle = "text-[#89CFF0]";
 
