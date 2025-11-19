@@ -7,7 +7,7 @@ const NavigationBar = () => {
   const pathname = usePathname();
 
   const baseStyle =
-    "md:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
+    "lg:text-2xl font-medium cursor-pointer transition-colors duration-500 transition-transform hover:scale-105";
   const activeStyle = "text-gray-900 scale-110";
   const inactiveStyle = "text-[#89CFF0]";
 
@@ -21,7 +21,7 @@ const NavigationBar = () => {
 
   return (
     <nav className="w-full p-4 mb-6 absolute top-10">
-      <ul className="flex justify-center space-x-4 md:space-x-20">
+      <ul className="flex justify-center space-x-4 lg:space-x-20">
         {navItems.map((item) => (
           <li
             key={item.path}
