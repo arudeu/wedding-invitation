@@ -48,6 +48,8 @@ const FamilyPage = () => {
         <h2 className="groom-head-text">SPONSORS</h2>
 
         <ul className="lg:mt-6 grid grid-cols-1 grid-cols-2 lg:gap-y-3 lg:gap-x-10 gap-x-4 text-md lg:text-xl">
+          <li>Engr. Aldrin Abraham</li>
+          <li>Ms. Melanie Abraham</li>
           <li>Mr. Erwin Bagamasbad</li>
           <li>Ms. Darlene Maranan</li>
           <li>Mr. Leonardo Red</li>
@@ -56,8 +58,6 @@ const FamilyPage = () => {
           <li>Ms. Nilda De Leon</li>
           <li>Mr. Bonifacio Manalo</li>
           <li>Ms. Rosenie Manalo</li>
-          <li>Engr. Aldrin Abraham</li>
-          <li>Ms. Melanie Abraham</li>
         </ul>
       </div>
     </motion.div>
