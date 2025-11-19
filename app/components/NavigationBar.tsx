@@ -21,7 +21,7 @@ const NavigationBar = () => {
 
   return (
     <nav className="w-full p-4 mb-6 absolute top-10">
-      <ul className="flex justify-center space-x-4 lg:space-x-20">
+      <ul className="flex justify-center space-x-3 lg:space-x-20">
         {navItems.map((item) => (
           <li
             key={item.path}

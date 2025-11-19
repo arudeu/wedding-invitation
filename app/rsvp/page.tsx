@@ -76,7 +76,7 @@ export default function RSVPPage() {
         <h1 className="navigation-header text-8xl font-bold">RSVP</h1>
       </div>
 
-      <Input
+      {/* <Input
         placeholder="Please enter your name...."
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -86,6 +86,15 @@ export default function RSVPPage() {
 
       <Button onClick={submitData} className="w-50 btn" disabled={loading}>
         {loading ? "Checking..." : "Submit"}
+      </Button> */}
+      <Button
+        className="w-50 btn"
+        disabled={loading}
+        onClick={() =>
+          (window.location.href = "https://forms.gle/Kd7vVF1BB7PHFuJz5")
+        }
+      >
+        RSVP Here
       </Button>
     </motion.div>
   );
