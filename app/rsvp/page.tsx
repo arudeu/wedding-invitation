@@ -72,8 +72,8 @@ export default function RSVPPage() {
       transition={{ duration: 1 }}
     >
       <div className="text-center">
-        <h3 className="text-xl">Kindly</h3>
-        <h1 className="navigation-header text-4xl font-bold">RSVP</h1>
+        <h3 className="text-6xl">Kindly</h3>
+        <h1 className="navigation-header text-8xl font-bold">RSVP</h1>
       </div>
 
       <Input
