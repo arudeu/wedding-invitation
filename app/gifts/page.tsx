@@ -17,7 +17,9 @@ const GiftsPage = () => {
         <p className="my-3">
           Your presence at our wedding is the greatest gift of all!
         </p>
-        <p className="my-3">However, if you wish to honor us with gifts</p>
+        <p className="my-3">
+          However, if you wish to honor us with gifts or monetary gifts
+        </p>
         <p className="my-3">
           for our future home, it would really make our day!
         </p>

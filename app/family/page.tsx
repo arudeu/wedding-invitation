@@ -21,8 +21,8 @@ const FamilyPage = () => {
           </div>
           <div className="text-center lg:mt-3">
             <ul className="lg:space-y-1 text-md lg:text-xl">
-              <li>Joaquin Teriana Parcon Jr.</li>
-              <li>Emily Mirafuentes Parcon</li>
+              <li>Mr. Joaquin Teriana Parcon Jr.</li>
+              <li>Mrs. Emily Mirafuentes Parcon</li>
             </ul>
           </div>
         </div>
@@ -35,8 +35,8 @@ const FamilyPage = () => {
           </div>
           <div className="text-center lg:mt-3">
             <ul className="lg:space-y-1 text-md lg:text-xl">
-              <li>Oliver Mercado Manalo</li>
-              <li>Ruzen Mercado Manalo</li>
+              <li>Mr. Oliver Arellano Manalo</li>
+              <li>Mrs. Ruzen Mercader Manalo</li>
             </ul>
           </div>
         </div>
@@ -48,16 +48,16 @@ const FamilyPage = () => {
         <h2 className="groom-head-text">SPONSORS</h2>
 
         <ul className="lg:mt-6 grid grid-cols-1 grid-cols-2 lg:gap-y-3 lg:gap-x-10 gap-x-4 text-md lg:text-xl">
-          <li>Erwin Bagamasbad</li>
-          <li>Darlene Maranan</li>
-          <li>Mary Jean Red</li>
-          <li>Leonardo Red</li>
-          <li>Nestor De Leon</li>
-          <li>Nilda De Leon</li>
-          <li>Bonifacio Manalo</li>
-          <li>Rosenie Manalo</li>
+          <li>Mr. Erwin Bagamasbad</li>
+          <li>Ms. Darlene Maranan</li>
+          <li>Mr. Leonardo Red</li>
+          <li>Ms. Mary Jean Red</li>
+          <li>Mr. Nestor De Leon</li>
+          <li>Ms. Nilda De Leon</li>
+          <li>Mr. Bonifacio Manalo</li>
+          <li>Ms. Rosenie Manalo</li>
           <li>Engr. Aldrin Abraham</li>
-          <li>Melanie Abraham</li>
+          <li>Ms. Melanie Abraham</li>
         </ul>
       </div>
     </motion.div>
