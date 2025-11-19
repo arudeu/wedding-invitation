@@ -21,8 +21,8 @@ const FamilyPage = () => {
           </div>
           <div className="text-center lg:mt-3">
             <ul className="lg:space-y-1 text-md lg:text-xl">
+              <li>Joaquin Teriana Parcon Jr.</li>
               <li>Emily Mirafuentes Parcon</li>
-              <li>Joaquin Teriana Parcon II</li>
             </ul>
           </div>
         </div>
@@ -35,8 +35,8 @@ const FamilyPage = () => {
           </div>
           <div className="text-center lg:mt-3">
             <ul className="lg:space-y-1 text-md lg:text-xl">
-              <li>Oliver Manalo</li>
-              <li>Ruzen Manalo</li>
+              <li>Oliver Mercado Manalo</li>
+              <li>Ruzen Mercado Manalo</li>
             </ul>
           </div>
         </div>
@@ -56,7 +56,7 @@ const FamilyPage = () => {
           <li>Nilda De Leon</li>
           <li>Bonifacio Manalo</li>
           <li>Rosenie Manalo</li>
-          <li>Aldin Abraham</li>
+          <li>Engr. Aldrin Abraham</li>
           <li>Melanie Abraham</li>
         </ul>
       </div>
