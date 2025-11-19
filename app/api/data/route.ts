@@ -1,44 +1,43 @@
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
-const DATA_FILE = path.join(process.cwd(), "data", "data.json");
+const SECRET_KEY = process.env.JSONBIN_SECRET_KEY!;
+const BIN_ID = process.env.JSONBIN_BIN_ID!;
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const name = typeof body?.name === "string" ? body.name.trim() : "";
+    const { name } = await req.json();
 
-    if (!name || name.trim() === "") {
-    return NextResponse.json(
-        { message: "Name is required" },
-        { status: 400 }
-    );
+    if (!name || !name.trim()) {
+      return NextResponse.json({ error: "Name cannot be blank" }, { status: 400 });
     }
 
+    // 1️⃣ Get current bin
+    const currentRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { "X-Master-Key": SECRET_KEY },
+    });
 
-    // ensure file exists and is valid JSON
-    let json: any[] = [];
-    try {
-      const file = await fs.readFile(DATA_FILE, "utf8");
-      json = JSON.parse(file);
-      if (!Array.isArray(json)) json = [];
-    } catch (readErr: any) {
-      // if file not found or invalid, start with empty array
-      if (readErr.code !== "ENOENT") {
-        // unknown read error
-        return NextResponse.json({ message: "Failed reading data file", detail: readErr.message }, { status: 500 });
-      }
-    }
+    const currentData = await currentRes.json();
 
-    // append and write
-    json.push({ name, createdAt: new Date().toISOString() });
-    await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
-    await fs.writeFile(DATA_FILE, JSON.stringify(json, null, 2), "utf8");
+    // 2️⃣ Safely get current names (default to empty array if undefined)
+    const currentNames: string[] = currentData?.record?.names || [];
 
-    return NextResponse.json({ message: "Saved successfully", item: { name } });
-  } catch (err: any) {
-    // return helpful debug message (safe for dev)
-    return NextResponse.json({ message: "Server error", detail: err?.message ?? String(err) }, { status: 500 });
+    // 3️⃣ Add new name
+    const updatedNames = [...currentNames, name];
+
+    // 4️⃣ Update bin
+    const updateRes = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": SECRET_KEY,
+        "X-Bin-Versioning": "false",
+      },
+      body: JSON.stringify({ names: updatedNames }),
+    });
+
+    const updatedData = await updateRes.json();
+    return NextResponse.json({ success: true, data: updatedData });
+  } catch (err) {
+    return NextResponse.json({ error: (err as any).message }, { status: 500 });
   }
 }

@@ -16,19 +16,28 @@ export default function RSVPPage() {
       return;
     }
 
-    const res = await fetch("/api/data", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
+    setLoading(true);
 
-    const payload = await res.json();
+    try {
+      const res = await fetch("/api/data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+      });
 
-    if (res.ok) {
-      toast.success("Saved successfully!");
-      setName("");
-    } else {
-      toast.error(payload.message || "Something went wrong!");
+      const payload = await res.json();
+
+      if (res.ok) {
+        toast.success("Saved successfully!");
+        setName("");
+      } else {
+        toast.error(payload.error || "Something went wrong!");
+      }
+    } catch (error) {
+      toast.error("Failed to save. Try again!");
+      console.error("Error submitting RSVP:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -39,8 +48,9 @@ export default function RSVPPage() {
       animate={{ filter: "none" }}
       transition={{ duration: 1 }}
     >
-      <h3 className="">Kindly</h3>
+      <h3>Kindly</h3>
       <h1 className="navigation-header">RSVP</h1>
+
       <Input
         placeholder="Please enter your name...."
         value={name}

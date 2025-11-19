@@ -172,6 +172,18 @@
     animation: spin-slow 4s linear infinite;
   }
 
+  .parents-head-text {
+    -webkit-text-stroke: 0.2px #F6F5F0;
+    text-stroke: 0.2px #F6F5F0;
+    font-family: 'Pinyon Script', cursive !important;
+    @apply text-[2rem] lg:text-5xl;
+  }
+  .groom-head-text {
+    @apply text-[2.4rem] lg:text-[4rem] font-bold mb-4 text-center text-[#89CFF0] -tracking-[0.5rem] leading-[0.4];
+    -webkit-text-stroke: 1px #F6F5F0;
+    text-stroke: 1px #F6F5F0;
+  }
+
 }
 
 @media screen and (max-width: 614px) {

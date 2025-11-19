@@ -14,6 +14,8 @@ const NavigationBar = () => {
   const navItems = [
     { name: "HOME", path: "/" },
     { name: "NAVIGATION", path: "/navigation" },
+    { name: "FAMILY", path: "/family" },
+    { name: "GIFTS", path: "/gifts" },
     { name: "RSVP", path: "/rsvp" },
   ];
 
