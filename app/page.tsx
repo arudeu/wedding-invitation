@@ -44,7 +44,7 @@ export default function Home() {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 8, ease: [0.5, 0.71, 1, 1] }}
       >
-        NOVEMBER 28, 2025 | 11:00 AM
+        NOVEMBER 28, 2025 | 10:30 AM
       </motion.h4>
       <motion.h5
         className="mt-5 address album-text text-center text-md"
