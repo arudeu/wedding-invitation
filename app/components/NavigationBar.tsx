@@ -18,9 +18,9 @@ const NavigationBar = () => {
   return (
     <nav
       aria-label="Main"
-      className="sticky top-0 z-30 border-b border-sky/40 bg-paper/85 px-3 py-2 backdrop-blur-sm sm:py-3"
+      className="sticky top-0 z-30 border-b border-sky/40 bg-paper/85 px-2 py-2 backdrop-blur-sm sm:px-3 sm:py-3"
     >
-      <ul className="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-x-4 gap-y-0 sm:gap-x-8 md:gap-x-12">
+      <ul className="mx-auto flex max-w-3xl flex-nowrap items-center justify-between gap-x-1 sm:justify-center sm:gap-x-8 md:gap-x-12">
         {navItems.map((item) => {
           const active = pathname === item.path;
           return (
@@ -29,7 +29,7 @@ const NavigationBar = () => {
                 href={item.path}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative block px-1 py-3 font-sans text-[0.7rem] font-medium tracking-[0.16em] transition-colors sm:text-sm sm:tracking-[0.25em]",
+                  "relative block whitespace-nowrap px-0.5 py-3 font-sans text-[length:clamp(0.5rem,2.9vw,0.7rem)] font-medium tracking-[0.12em] transition-colors sm:px-1 sm:text-sm sm:tracking-[0.25em]",
                   active ? "text-ink" : "text-dusty hover:text-ink"
                 )}
               >
