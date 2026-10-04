@@ -1,31 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap');
-
 @import "tailwindcss";
 @import "tw-animate-css";
-
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-serif: var(--font-caslon), Georgia, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
+  --font-script: var(--font-pinyon), cursive;
+
+  /* invitation palette: baby blue stays the signature colour */
+  --color-sky: #89CFF0;
+  --color-dusty: #3F6F8F;
+  --color-ink: #1E3446;
+  --color-paper: #F6F5F0;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -50,37 +40,24 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --background: #F6F5F0;
+  --foreground: #1E3446;
+  --card: #ffffff;
+  --card-foreground: #1E3446;
+  --popover: #ffffff;
+  --popover-foreground: #1E3446;
+  --primary: #3F6F8F;
+  --primary-foreground: #F6F5F0;
+  --secondary: #E8F4FB;
+  --secondary-foreground: #1E3446;
+  --muted: #E8F4FB;
+  --muted-foreground: #4B6478;
+  --accent: #E8F4FB;
+  --accent-foreground: #1E3446;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --border: #CFE6F3;
+  --input: #CFE6F3;
+  --ring: #89CFF0;
 }
 
 .dark {
@@ -102,118 +79,16 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+  html {
+    scroll-behavior: smooth;
   }
   body {
-    font-family: 'Libre Caslon Text', serif;
+    @apply bg-sky font-serif text-ink antialiased;
   }
-  h1 {
-    @apply text-[8rem] font-bold mb-4 text-center text-[#89CFF0] -tracking-[0.5rem] leading-[0.8];
-    -webkit-text-stroke: 1px #F6F5F0;
-    text-stroke: 1px #F6F5F0;
-  }
-  .font-outline-4 {
-    -webkit-text-stroke: 4px #F6F5F0;
-    text-stroke: 4px #F6F5F0;
-  }
-  h3 {
-    -webkit-text-stroke: 0.2px #F6F5F0;
-    text-stroke: 0.2px #F6F5F0;
-    font-family: 'Pinyon Script', cursive !important;
-    @apply text-7xl text-center mb-2 text-black leading-[0.2] -tracking-[0.2rem];
-  }
-  h4 {
-    @apply text-xl text-center mb-2 text-[#89CFF0] leading-tight tracking-[0.4rem];
-  }
-  .address {
-    @apply tracking-[0];
-  }
-  .album-text{
-    font-family: "Stack Sans Text", sans-serif;
-    @apply text-sm;
-  }
-  .navigation-header {
-    @apply text-[4rem] -tracking-[0.5rem] leading-[0.7];
-  }
-  .guest-input{
-    font-family: "Stack Sans Text", sans-serif !important;
-    font-size: 1rem !important;
-  }
-  .btn{
-    background-color: #89CFF0 !important;
-    font-size: 1.2rem !important;
-  }
-  @keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 4s linear infinite;
-  }
-
-  .parents-head-text {
-    -webkit-text-stroke: 0.2px #F6F5F0;
-    text-stroke: 0.2px #F6F5F0;
-    font-family: 'Pinyon Script', cursive !important;
-    @apply text-[2rem] lg:text-5xl;
-  }
-  .groom-head-text {
-    @apply text-[2.4rem] lg:text-[4rem] font-bold mb-4 text-center text-[#89CFF0] -tracking-[0.5rem] leading-[0.4];
-    -webkit-text-stroke: 1px #F6F5F0;
-    text-stroke: 1px #F6F5F0;
-  }
-
-}
-
-@media screen and (max-width: 614px) {
-  h1 {
-    @apply text-[5rem] -tracking-[0.7rem] leading-[0.5];
-    -webkit-text-stroke: 1px #F6F5F0;
-    text-stroke: 1px #F6F5F0;
-  }
-  .font-outline-4 {
-    -webkit-text-stroke: 4px #F6F5F0;
-    text-stroke: 4px #F6F5F0;
-  }
-  h3 {
-    -webkit-text-stroke: 0.2px #F6F5F0;
-    text-stroke: 0.2px #F6F5F0;
-    @apply text-5xl text-center mb-2 text-black leading-[0.8] -tracking-[0.2rem];
-  }
-  h4 {
-    @apply text-sm text-center mb-2 text-[#89CFF0];
-  }
-  .address {
-    @apply text-sm tracking-[0];
-  }
-  
-}
-@keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.animate-spin-slow {
-  animation: spin-slow 4s linear infinite;
 }

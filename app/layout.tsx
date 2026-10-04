@@ -1,52 +1,50 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import NavigationBar from "./components/NavigationBar";
-import Head from "next/head";
-import BackgroundMusic from "./components/BackgroundMusic";
+import type { Metadata, Viewport } from "next";
+import { Jost, Libre_Caslon_Text, Pinyon_Script } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import BackgroundMusic from "./components/BackgroundMusic";
+import Corners from "./components/Corners";
+import NavigationBar from "./components/NavigationBar";
+import Providers from "./components/Providers";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const caslon = Libre_Caslon_Text({
+  variable: "--font-caslon",
   subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
 });
+const pinyon = Pinyon_Script({ variable: "--font-pinyon", subsets: ["latin"], weight: "400" });
+const jost = Jost({ variable: "--font-jost", subsets: ["latin"] });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: "Joaquin & Krisna",
+  description: "You Are Invited! Wedding invitation for Joaquin & Krisna",
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#89CFF0",
+};
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <Head>
-        <title>Joaquin & Krisna</title>
-        <meta name="description" content="You Are Invited!" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased p-6 flex items-center justify-center h-screen w-screen bg-[#89CFF0]`}
-      >
-        <Toaster richColors closeButton />
-        <div className="relative h-full w-full flex items-center justify-center bg-[#F6F5F0]">
-          {/* Client-side Navigation */}
-          <NavigationBar />
-
-          {/* Page content */}
-          <main>{children}</main>
-
-          {/* Decorative elements */}
-          <span className="hidden lg:block absolute top-1 left-1 xl:top-10 xl:left-5 xl:w-60 xl:h-60 bg-[url('/flw-tl.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] z-1"></span>
-          <span className="hidden lg:block absolute top-1 right-1 xl:top-10 xl:right-5 xl:w-60 xl:h-60 bg-[url('/flw-tr.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] z-1"></span>
-          <span className="hidden lg:block absolute bottom-1 left-1 xl:bottom-10 xl:left-5 xl:w-60 xl:h-60 bg-[url('/flw-bl.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] z-1"></span>
-          <span className="hidden lg:block absolute bottom-1 right-1 xl:bottom-10 xl:right-5 xl:w-60 xl:h-60 bg-[url('/flw-br.svg')] bg-no-repeat bg-[length:5rem_5rem] xl:bg-[length:15rem_15rem] z-1"></span>
-
-          {/* Background Music */}
+    <html lang="en" className={`${caslon.variable} ${pinyon.variable} ${jost.variable}`}>
+      <body>
+        <Providers>
+          <div className="min-h-dvh p-2 sm:p-4 md:p-6">
+            {/* overflow-clip (not hidden) so the sticky nav keeps working */}
+            <div className="relative flex min-h-[calc(100dvh-1rem)] flex-col overflow-clip rounded-2xl bg-paper shadow-sm sm:min-h-[calc(100dvh-2rem)] sm:rounded-3xl md:min-h-[calc(100dvh-3rem)]">
+              <Corners />
+              <NavigationBar />
+              <main className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 pb-28 pt-8 sm:px-8 sm:pt-12">
+                {children}
+              </main>
+            </div>
+          </div>
           <BackgroundMusic />
-        </div>
+          <Toaster richColors closeButton />
+        </Providers>
       </body>
     </html>
   );

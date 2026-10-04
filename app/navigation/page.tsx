@@ -1,39 +1,64 @@
 "use client";
-
-import React from "react";
 import { motion } from "motion/react";
+import { Compass, MapPin } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { PageTitle, Reveal } from "../components/Bits";
+import { event, mapsDirectionsUrl, mapsSearchUrl } from "@/lib/event";
 
 const NavigationPage = () => {
   return (
-    <motion.div
-      className="text-center"
-      initial={{ filter: "blur(20px)" }}
-      animate={{ filter: "none" }}
-      transition={{ duration: 1 }}
-    >
-      <h1 className="navigation-header mt-10">WE'RE</h1>
-      <h3 className="">Here!</h3>
-      <div className="py-5 flex justify-center items-center">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d968.8688865210454!2d121.07019990693269!3d13.750171548323033!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd053642895993%3A0x42fb54bd6480be0c!2sPallocan%20Kanluran%2C%20Batangas%20City%2C%20Batangas!5e0!3m2!1sen!2sph!4v1763459217206!5m2!1sen!2sph"
-          className="w-80 h-50 2xl:w-100 2xl:h-100"
-          loading="lazy"
-          style={{
-            border: "5px #89CFF0 solid",
-          }}
-        ></iframe>
-      </div>
+    <div className="flex w-full max-w-2xl flex-col items-center gap-8">
+      <PageTitle script="We're" title="HERE!" />
 
-      <div>
-        <h5 className="address album-text">
-          BLK 11, LOT 44, ST. MARTIN ST.,
-          <br />
-          TIERRA VERDE SUBDIVISION, PALLOCAN WEST,
-          <br />
-          BATANGAS CITY
-        </h5>
-      </div>
-    </motion.div>
+      <Reveal className="w-full">
+        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border-4 border-sky bg-sky/20 shadow-xl sm:aspect-video">
+          <iframe
+            title="Map to the wedding venue"
+            src={event.mapEmbed}
+            className="absolute inset-0 h-full w-full border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+      </Reveal>
+
+      <Reveal className="flex w-full flex-col items-center gap-5 text-center" delay={0.1}>
+        <motion.div
+          className="grid size-12 place-items-center rounded-full bg-sky/30 text-dusty"
+          animate={{ y: [0, -6, 0] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <MapPin aria-hidden="true" />
+        </motion.div>
+        <address className="font-sans text-sm not-italic leading-relaxed tracking-wide text-ink sm:text-base">
+          {event.addressLines.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </address>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Button
+            asChild
+            className="h-12 rounded-full bg-dusty px-7 font-sans text-xs uppercase tracking-[0.2em] text-paper hover:bg-ink"
+          >
+            <a href={mapsDirectionsUrl} target="_blank" rel="noopener noreferrer">
+              <Compass /> Get directions
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            className="h-12 rounded-full border-dusty bg-transparent px-7 font-sans text-xs uppercase tracking-[0.2em] text-dusty hover:bg-sky/20 hover:text-ink"
+          >
+            <a href={mapsSearchUrl} target="_blank" rel="noopener noreferrer">
+              Open in Maps
+            </a>
+          </Button>
+        </div>
+      </Reveal>
+    </div>
   );
 };
 

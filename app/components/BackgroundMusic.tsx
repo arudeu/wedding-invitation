@@ -1,55 +1,72 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion, useAnimationFrame, useMotionValue } from "motion/react";
+import { Pause, Play } from "lucide-react";
 import { getMusic } from "./lib/music";
-import { Play, Pause } from "lucide-react";
-
-let isInitialized = false; // prevent re-init
 
 export default function BackgroundMusic() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const music = getMusic();
+  const rotate = useMotionValue(0);
 
+  // Follow the real state of the player. Browsers block autoplay until the first tap,
+  // so the vinyl only starts turning once the music actually starts.
   useEffect(() => {
-    if (!isInitialized) {
-      isInitialized = true;
-
-      // Try autoplay
-      try {
-        music.play();
-        setIsPlaying(true);
-      } catch {
-        // Autoplay blocked
-        setIsPlaying(false);
-      }
-    } else if (music?.playing()) {
-      setIsPlaying(true);
-    }
+    const music = getMusic();
+    const on = () => setIsPlaying(true);
+    const off = () => setIsPlaying(false);
+    music.on("play", on);
+    music.on("pause", off);
+    music.on("stop", off);
+    setIsPlaying(music.playing());
+    return () => {
+      music.off("play", on);
+      music.off("pause", off);
+      music.off("stop", off);
+    };
   }, []);
 
+  // The record keeps its angle when paused and carries on from there.
+  useAnimationFrame((_, delta) => {
+    if (isPlaying) rotate.set(rotate.get() + delta * 0.09);
+  });
+
   const toggleMusic = () => {
-    if (!music) return;
-    if (music.playing()) {
-      music.pause();
-      setIsPlaying(false);
-    } else {
-      music.play();
-      setIsPlaying(true);
-    }
+    const music = getMusic();
+    if (music.playing()) music.pause();
+    else music.play();
   };
 
   return (
-    <div className="fixed bottom-8 right-8 z-50">
-      <div
-        className="w-20 h-20 rounded-full bg-[url('/music/vinyl.jpg')] bg-size-[auto_100px] bg-center border-4 border-gray-300 shadow-lg cursor-pointer flex items-center justify-center
-                   transition-transform transform hover:scale-110 hover:rotate-[15deg]"
-        onClick={toggleMusic}
+    <motion.button
+      type="button"
+      onClick={toggleMusic}
+      aria-label={isPlaying ? "Pause background music" : "Play background music"}
+      aria-pressed={isPlaying}
+      className="group fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-50 size-16 rounded-full shadow-xl outline-none focus-visible:ring-4 focus-visible:ring-sky sm:right-6 sm:size-20"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 160, damping: 14, delay: 1 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.94 }}
+    >
+      <motion.span
+        style={{ rotate }}
+        className="absolute inset-0 rounded-full border-2 border-white/70 [background:repeating-radial-gradient(circle_at_center,#111_0_2px,#1e1e1e_2px_4px)]"
       >
-        <div className="w-6 h-6 rounded-full bg-gray-500 animate-spin-slow"></div>
-        <div className="absolute text-white">
-          {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-        </div>
-      </div>
-    </div>
+        {/* light reflection so the turning is easy to see */}
+        <span className="absolute inset-0 rounded-full [background:conic-gradient(transparent_0_20%,rgba(255,255,255,0.18)_25%,transparent_30%_70%,rgba(255,255,255,0.18)_75%,transparent_80%)]" />
+        {/* album cover as the record label */}
+        <span className="absolute inset-[28%] rounded-full bg-[url('/music/vinyl.jpg')] bg-cover bg-center ring-2 ring-sky/80" />
+        <span className="absolute left-1/2 top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-paper" />
+      </motion.span>
+      <span className="absolute inset-0 grid place-items-center text-white drop-shadow">
+        {isPlaying ? (
+          <Pause size={20} className="opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100" />
+        ) : (
+          <Play size={22} className="fill-white" />
+        )}
+      </span>
+    </motion.button>
   );
 }
